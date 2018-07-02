@@ -26,7 +26,6 @@ public class WordRepository {
         List<Word> wordList = new ArrayList<>();
         wordList.add(word);
         new insertAsyncTask(mWordDao).execute(wordList);
-        new insertAsyncTask().execute(wordList);
     }
 
     public void insert(List<Word> wordList){
@@ -38,12 +37,10 @@ public class WordRepository {
         private WordDao mAysncTaskDao;
 
         public insertAsyncTask(){
-            Log.e("WordRepository", "insertAsyncTask() is called");
             this.mAysncTaskDao = null;
         }
 
         public insertAsyncTask(WordDao wordDao) {
-            Log.e("WordRepository", "insertAsyncTask(WordDao wordDao) is called");
             this.mAysncTaskDao = wordDao;
         }
 
@@ -51,10 +48,14 @@ public class WordRepository {
         protected Void doInBackground(List<?>... objectParams) {
             List<?> objectList = objectParams[0];
 
+            if(objectList == null && objectList.isEmpty())
+                return null;
 
-            if(objectList != null && !objectList.isEmpty() && objectList.get(0) instanceof Word){
+            if (objectList.get(0) instanceof Word){
                 for (int i = 0; i < objectList.size(); i++){
-                    if(mAysncTaskDao != null)
+                    if(mAysncTaskDao == null)
+                        return null;
+                    else
                         mAysncTaskDao.insert((Word) objectList.get(i));
                 }
             }
