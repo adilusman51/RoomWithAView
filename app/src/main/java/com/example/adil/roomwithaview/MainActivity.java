@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final WordListAdapter adapter = new WordListAdapter(this);
+        adapter.setOnWordChangedListner(onWordChangedListner);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -93,4 +94,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    WordListAdapter.OnWordChangedListner onWordChangedListner = new WordListAdapter.OnWordChangedListner() {
+        @Override
+        public void onWordEdited(Word wordToBeUpdated) {
+//            mWordViewModel.update(wordToBeUpdated);
+        }
+
+        @Override
+        public void onWordDeleted(Word wordToBeDeleted) {
+            mWordViewModel.delete(wordToBeDeleted);
+        }
+    };
 }

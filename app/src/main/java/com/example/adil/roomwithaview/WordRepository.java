@@ -25,7 +25,7 @@ public class WordRepository {
     public void insert(Word word){
         List<Word> wordList = new ArrayList<>();
         wordList.add(word);
-        new insertAsyncTask(mWordDao).execute(wordList);
+        insert(wordList);
     }
 
     public void insert(List<Word> wordList){
@@ -67,11 +67,11 @@ public class WordRepository {
     public void update(Word word){
         List<Word> wordList = new ArrayList<>();
         wordList.add(word);
-        new insertAsyncTask(mWordDao).execute(wordList);
+        update(wordList);
     }
 
     public void update(List<Word> wordList){
-        new insertAsyncTask(mWordDao).execute(wordList);
+        new updateAsyncTask(mWordDao).execute(wordList);
     }
 
     private static class updateAsyncTask extends AsyncTask<List<?>, Void, Void>{
@@ -109,11 +109,11 @@ public class WordRepository {
     public void delete(Word word){
         List<Word> wordList = new ArrayList<>();
         wordList.add(word);
-        new insertAsyncTask(mWordDao).execute(wordList);
+        delete(wordList);
     }
 
     public void delete(List<Word> wordList){
-        new insertAsyncTask(mWordDao).execute(wordList);
+        new deleteAsyncTask(mWordDao).execute(wordList);
     }
 
     private static class deleteAsyncTask extends AsyncTask<List<?>, Void, Void>{

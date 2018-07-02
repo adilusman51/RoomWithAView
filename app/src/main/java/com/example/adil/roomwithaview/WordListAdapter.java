@@ -5,21 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import java.util.List;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
     class WordViewHolder extends RecyclerView.ViewHolder {
-        private final TextView wordItemView;
+        private final EditText wordItemView;
+        private final View deleteView;
 
         private WordViewHolder(View itemView) {
             super(itemView);
-            wordItemView = itemView.findViewById(R.id.textView);
+            wordItemView = itemView.findViewById(R.id.editView);
+            deleteView = itemView.findViewById(R.id.deleteView);
         }
     }
 
+    private OnWordChangedListner onWordChangedListner;
     private final LayoutInflater mInflater;
     private List<Word> mWords; // Cached copy of words
 
@@ -32,14 +35,27 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     @Override
-    public void onBindViewHolder(WordViewHolder holder, int position) {
+    public void onBindViewHolder(WordViewHolder holder, final int position) {
         if (mWords != null) {
             Word current = mWords.get(position);
             holder.wordItemView.setText(current.getWord());
+            holder.deleteView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(onWordChangedListner != null){
+                        Word current = mWords.get(position);
+                        onWordChangedListner.onWordDeleted(current);
+                    }
+                }
+            });
         } else {
             // Covers the case of data not being ready yet.
             holder.wordItemView.setText("No Word");
         }
+    }
+
+    public void setOnWordChangedListner(OnWordChangedListner listner){
+        this.onWordChangedListner = listner;
     }
 
     void setWords(List<Word> words){
@@ -54,5 +70,10 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         if (mWords != null)
             return mWords.size();
         else return 0;
+    }
+
+    public interface OnWordChangedListner{
+        abstract void onWordEdited(Word wordToBeUpdated);
+        abstract void onWordDeleted(Word wordToBeDeleted);
     }
 }
