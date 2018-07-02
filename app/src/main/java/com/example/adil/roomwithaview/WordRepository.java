@@ -64,5 +64,87 @@ public class WordRepository {
         }
     }
 
-    //TODO UPDATE AND DELETE WRAPPERS
+    public void update(Word word){
+        List<Word> wordList = new ArrayList<>();
+        wordList.add(word);
+        new insertAsyncTask(mWordDao).execute(wordList);
+    }
+
+    public void update(List<Word> wordList){
+        new insertAsyncTask(mWordDao).execute(wordList);
+    }
+
+    private static class updateAsyncTask extends AsyncTask<List<?>, Void, Void>{
+
+        private WordDao mAysncTaskDao;
+
+        public updateAsyncTask(){
+            this.mAysncTaskDao = null;
+        }
+
+        public updateAsyncTask(WordDao wordDao) {
+            this.mAysncTaskDao = wordDao;
+        }
+
+        @Override
+        protected Void doInBackground(List<?>... objectParams) {
+            List<?> objectList = objectParams[0];
+
+            if(objectList == null && objectList.isEmpty())
+                return null;
+
+            if (objectList.get(0) instanceof Word){
+                for (int i = 0; i < objectList.size(); i++){
+                    if(mAysncTaskDao == null)
+                        return null;
+                    else
+                        mAysncTaskDao.update((Word) objectList.get(i));
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public void delete(Word word){
+        List<Word> wordList = new ArrayList<>();
+        wordList.add(word);
+        new insertAsyncTask(mWordDao).execute(wordList);
+    }
+
+    public void delete(List<Word> wordList){
+        new insertAsyncTask(mWordDao).execute(wordList);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<List<?>, Void, Void>{
+
+        private WordDao mAysncTaskDao;
+
+        public deleteAsyncTask(){
+            this.mAysncTaskDao = null;
+        }
+
+        public deleteAsyncTask(WordDao wordDao) {
+            this.mAysncTaskDao = wordDao;
+        }
+
+        @Override
+        protected Void doInBackground(List<?>... objectParams) {
+            List<?> objectList = objectParams[0];
+
+            if(objectList == null && objectList.isEmpty())
+                return null;
+
+            if (objectList.get(0) instanceof Word){
+                for (int i = 0; i < objectList.size(); i++){
+                    if(mAysncTaskDao == null)
+                        return null;
+                    else
+                        mAysncTaskDao.delete((Word) objectList.get(i));
+                }
+            }
+
+            return null;
+        }
+    }
 }
