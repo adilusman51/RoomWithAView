@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
 
-        <EditText
-            android:id="@+id/editView"
-            style="@style/word_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:hint="@string/hint_word"
-            android:layout_weight="1"/>
+    <EditText
+        android:id="@+id/editView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:hint="@string/hint_word" />
 
-        <ImageButton
-            android:id="@+id/deleteView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_delete_black_24dp"/>
+    <ImageButton
+        android:id="@+id/saveView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:srcCompat="@drawable/ic_edit_black_24dp"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:id="@+id/deleteView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:srcCompat="@drawable/ic_delete_black_24dp"
+        android:background="@android:color/transparent"
+        android:layout_marginRight="8dp" />
 
 </LinearLayout>

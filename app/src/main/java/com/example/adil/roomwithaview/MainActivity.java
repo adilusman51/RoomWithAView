@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     WordListAdapter.OnWordChangedListner onWordChangedListner = new WordListAdapter.OnWordChangedListner() {
         @Override
         public void onWordEdited(Word wordToBeUpdated) {
-//            mWordViewModel.update(wordToBeUpdated);
+            mWordViewModel.update(wordToBeUpdated);
         }
 
         @Override

@@ -13,12 +13,14 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     class WordViewHolder extends RecyclerView.ViewHolder {
         private final EditText wordItemView;
+        private final View saveView;
         private final View deleteView;
 
         private WordViewHolder(View itemView) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.editView);
             deleteView = itemView.findViewById(R.id.deleteView);
+            saveView = itemView.findViewById(R.id.saveView);
         }
     }
 
@@ -45,6 +47,15 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
                     if(onWordChangedListner != null){
                         Word current = mWords.get(position);
                         onWordChangedListner.onWordDeleted(current);
+                    }
+                }
+            });
+            holder.saveView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(onWordChangedListner != null){
+                        Word current = mWords.get(position);
+                        onWordChangedListner.onWordEdited(current);
                     }
                 }
             });
