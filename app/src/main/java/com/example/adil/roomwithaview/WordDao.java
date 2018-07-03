@@ -14,13 +14,13 @@ import java.util.List;
 public interface WordDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Word word);
+    void insert(Word... word);
 
     @Update
-    void update(Word word);
+    void update(Word... word);
 
     @Delete
-    void delete(Word word);
+    void delete(Word... word);
 
     @Query("DELETE FROM word_table")
     void deleteAll();

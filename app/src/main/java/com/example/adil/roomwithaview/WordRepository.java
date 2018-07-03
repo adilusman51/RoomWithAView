@@ -52,12 +52,11 @@ public class WordRepository {
                 return null;
 
             if (objectList.get(0) instanceof Word){
-                for (int i = 0; i < objectList.size(); i++){
-                    if(mAysncTaskDao == null)
-                        return null;
-                    else
-                        mAysncTaskDao.insert((Word) objectList.get(i));
-                }
+
+                Word[] words = new Word[objectList.size()];
+                objectList.toArray(words);
+
+                if(mAysncTaskDao != null) mAysncTaskDao.insert(words);
             }
 
             return null;
@@ -94,12 +93,11 @@ public class WordRepository {
                 return null;
 
             if (objectList.get(0) instanceof Word){
-                for (int i = 0; i < objectList.size(); i++){
-                    if(mAysncTaskDao == null)
-                        return null;
-                    else
-                        mAysncTaskDao.update((Word) objectList.get(i));
-                }
+
+                Word[] words = new Word[objectList.size()];
+                objectList.toArray(words);
+
+                if(mAysncTaskDao != null) mAysncTaskDao.update(words);
             }
 
             return null;
@@ -136,12 +134,11 @@ public class WordRepository {
                 return null;
 
             if (objectList.get(0) instanceof Word){
-                for (int i = 0; i < objectList.size(); i++){
-                    if(mAysncTaskDao == null)
-                        return null;
-                    else
-                        mAysncTaskDao.delete((Word) objectList.get(i));
-                }
+
+                Word[] words = new Word[objectList.size()];
+                objectList.toArray(words);
+
+                if(mAysncTaskDao != null) mAysncTaskDao.delete(words);
             }
 
             return null;
